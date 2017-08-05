@@ -87,3 +87,124 @@ header("location:category.php");
 }
 
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Edit | To do List</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="col-md-8"><h4>Welcome, <?php echo  $_SESSION['email'];
+
+			?></h4></div>
+			<div class="col-md-4"><a href="list1.php">Home</a></div>
+			<div class="col-md-4"><a href="logout.php">Logout</a></div>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="panel-heading"><h4>Edit Details</h4></div>
+				<form method='post' action=''>
+					<div class="form-group row">
+						<label for="example-text-input" class="col-md-3 col-form-label">List</label>
+						<div class="col-md-8">
+							<input class="form-control" type="text" name="category" placeholder="List" 
+
+value="<?php 
+
+if(isset($_GET['edit'])){
+
+ echo $catresult['title'];
+}
+?>">
+
+							 
+						
+
+						</div>
+					</div>
+<?php if(isset($_GET['edit'])){
+?>
+					<input type="submit" name="update"  class="btn btn-primary" value="Update"/>
+
+<?php 
+}
+else {?>
+
+					<input type="submit" name="submit"  class="btn btn-primary" value="Save"/>
+
+<?php
+}
+	?>
+					
+					<br/>
+					<?php echo ucwords($message);?>
+
+					<a href="list1.php" class="btn btn-primary pull-right">Back</a>
+<?php if(isset($_GET['edit'])){
+	?>
+					<a href="category.php" class="btn btn-info pull-right">Add</a>
+<?php }?>
+				</form>
+			</div>
+
+
+
+
+
+
+
+
+
+			<table class="table">
+				<thead>
+					<tr>
+						<th>
+							#
+						</th>
+						<th>
+							List
+						</th>
+						<th>
+							Action						</th>
+
+						</tr>
+					</thead>
+					<tbody>
+
+						<?php
+						$i=1;
+						foreach ($result as $key => $value) {
+							?>
+							<tr class="success">
+								<td>
+									<?php echo $i;?>
+								</td>
+								<td>
+									<?php echo $value['title'];?>
+								</td>
+								<td>
+
+								<a  onclick="return confirm('Are you sure want to delete this category ?')"  href="category.php?del=<?php echo $value['id'];?>">Delete</a>
+
+								<a   href="category.php?edit=<?php echo $value['id'];?>">edit</a>
+
+
+								</td>
+
+							</tr>
+
+							<?php
+							$i++;}
+							?>
+
+						</tbody>
+					</table>
+
+				</div>
+			</body>
+			</html>
