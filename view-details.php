@@ -34,3 +34,23 @@ require_once('db_connection.php');
           </tr>
        </thead>
 	<tbody>
+ <?php
+	$query =$db->query("select * from todos where id='".$_GET['id']."'");
+	while($feth=$query->fetch())
+	{
+	?>
+				<tr>
+					<td><?php echo $feth['id'];?></td>
+					<td><?php echo $feth['todo_item'];?></td>
+					<td><?php echo $feth['description'];?></td>
+					<td><?php echo stripslashes($feth['stime']);?></td>
+					<td><?php echo stripslashes($feth['etime']);?></td>             
+				 </tr>
+	<?php } ?>            
+    </table>
+			</div>
+		</div>
+		<a href="list1.php" class="btn btn-primary pull-right">Back</a>
+</div>
+</body>
+</html>
